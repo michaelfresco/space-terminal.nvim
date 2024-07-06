@@ -2,7 +2,7 @@
 
 ## screenshot
 
-![screenshot space-terminal](./img/screenshot-space-terminal-02.png)
+![screenshot space-terminal](./img/screenshot-space-terminal-01.png)
 
 
 ## notes
