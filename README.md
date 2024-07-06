@@ -7,13 +7,16 @@
 
 ## notes
 
-install:
+clone manually:
+
+    cd ~/.local/share/nvim/plugged
+    git clone git@github.com:michaelfresco/space-terminal.nvim.git
+
+
+add to vim-plug:
 
     " vim-plug
     Plug 'michaelfresco/space-terminal.nvim'
-
-    --- packer
-    use 'michaelfresco/space-terminal.nvim'
 
 
 config (classic):
@@ -22,14 +25,6 @@ config (classic):
         \ 'style': 'default',
     \}
     colorscheme spaceterminal
-
-
-config (lua):
-
-    require('spec-terminal').setup {
-        style = 'default'
-    }
-    require('spec-terminal').load()
 
 
 ## reference
