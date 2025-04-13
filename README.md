@@ -19,12 +19,14 @@ add to vim-plug:
     Plug 'michaelfresco/space-terminal.nvim'
 
 
-config (classic):
+config vim:
 
-    let g:spaceterminal_config = {
-        \ 'style': 'default',
-    \}
     colorscheme spaceterminal
+
+
+config lua:
+
+    require('spaceterminal').load()
 
 
 ## reference
