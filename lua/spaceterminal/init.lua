@@ -43,7 +43,7 @@ end
 
 local default_config = {
     -- Main options --
-    style = 'dark',    -- choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = 'darker',    -- choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
     toggle_style_key = nil,
     toggle_style_list = M.styles_list,
     transparent = false,     -- don't set background
