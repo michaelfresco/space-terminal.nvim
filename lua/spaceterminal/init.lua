@@ -1,6 +1,6 @@
 local M = {}
 
-M.styles_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }
+M.styles_list = { 'default', 'darker' }
 
 ---Change spaceterminal option (vim.g.spaceterminal_config.option)
 ---It can't be changed directly by modifying that field due to a Neovim lua bug with global variables (spaceterminal_config is a global variable)
@@ -18,32 +18,30 @@ function M.colorscheme()
     if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
     vim.o.termguicolors = true
     vim.g.colors_name = "spaceterminal"
-    if vim.o.background == 'light' then
-        M.set_options('style', 'light')
-    elseif vim.g.spaceterminal_config.style == 'light' then
-        M.set_options('style', 'light')
-    end
     require('spaceterminal.highlights').setup()
     require('spaceterminal.terminal').setup()
 end
 
----Toggle between spaceterminal styles
+---Toggle between spaceterminal styles ('default' <-> 'darker')
 function M.toggle()
-    local index = vim.g.spaceterminal_config.toggle_style_index + 1
-    if index > #vim.g.spaceterminal_config.toggle_style_list then index = 1 end
-    M.set_options('style', vim.g.spaceterminal_config.toggle_style_list[index])
-    M.set_options('toggle_style_index', index)
-    if vim.g.spaceterminal_config.style == 'light' then
-        vim.o.background = 'light'
-    else
-        vim.o.background = 'dark'
+    local list = vim.g.spaceterminal_config.toggle_style_list
+    local current = vim.g.spaceterminal_config.style
+    -- advance to the style after the current one (wrapping around), so the
+    -- first keypress always switches regardless of the stored index
+    local index = 1
+    for i, name in ipairs(list) do
+        if name == current then index = i end
     end
+    index = index + 1
+    if index > #list then index = 1 end
+    M.set_options('style', list[index])
+    M.set_options('toggle_style_index', index)
     vim.api.nvim_command('colorscheme spaceterminal')
 end
 
 local default_config = {
     -- Main options --
-    style = 'darker',    -- choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    style = 'default',    -- choose between 'default' and 'darker'
     toggle_style_key = nil,
     toggle_style_list = M.styles_list,
     transparent = false,     -- don't set background
